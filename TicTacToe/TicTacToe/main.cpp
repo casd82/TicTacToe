@@ -2,6 +2,7 @@
 #include <array>
 
 void draw_board(sf::RenderWindow &window);
+void draw_slot(sf::RenderWindow &window, int symbol ,int x_pos, int y_pos);
 
 int main()
 {
@@ -31,6 +32,13 @@ int main()
         
         //draw the board
         draw_board(window);
+        
+        //draw the slots
+        for (int i = 0; 3; ++i)
+            for (int j = 0; j < 3; ++j)
+                draw_slot(window, board[i][j], i, j);
+                
+        window.display();
     }
     
     return 0;
@@ -43,7 +51,7 @@ void draw_board(sf::RenderWindow &window)
     window.clear(sf::Color::Black);
     
     //draw horizontal lines
-    sf::RectangleShape line1(sf::Vector2f(600, 5));
+    sf::RectangleShape line1(sf::Vector2f(600, 2));
     line1.setFillColor(sf::Color::White);
     line1.setPosition(0, 200);
     
@@ -51,18 +59,50 @@ void draw_board(sf::RenderWindow &window)
     line2.setPosition(0, 400);
     
     //draw vertical lines;
-    sf::RectangleShape line3(sf::Vector2f(5, 600));
+    sf::RectangleShape line3(sf::Vector2f(2, 600));
     line3.setFillColor(sf::Color::White);
     line3.setPosition(200, 0);
     
     sf::RectangleShape line4 = line3;
     line4.setPosition(400, 0);
     
+    
     //draw to the window
     window.draw(line1);
     window.draw(line2);
     window.draw(line3);
     window.draw(line4);
-    
-    window.display();
+}
+
+//draw each slot with X or O
+void draw_slot(sf::RenderWindow &window, int symbol, int x_pos, int y_pos)
+{
+
+    if (symbol == 1)      //O
+    {
+        sf::CircleShape shape(90); //radius of 100
+        shape.setFillColor(sf::Color::Transparent);   //the inner loop of O
+        shape.setOutlineThickness(5);
+        shape.setOutlineColor(sf::Color::White);
+        shape.setPosition(5 + (205 * x_pos), 5 + (205 * y_pos));
+        
+        window.draw(shape);
+    }
+    else if (symbol == 2) //X
+    {
+        //the \ cross
+        sf::RectangleShape cross1(sf::Vector2f(200, 5));
+        cross1.setPosition(25 + (210 * x_pos), 20 + (210 * y_pos));
+        cross1.rotate(45);
+        cross1.setFillColor(sf::Color::White);
+        
+        //the / cross
+        sf::RectangleShape cross2(sf::Vector2f(200,5));
+        cross2.setPosition(25 + (210 * x_pos), 165 + (205 * y_pos));
+        cross2.rotate(-45);
+        cross2.setFillColor(sf::Color::White);
+        
+        window.draw(cross1);
+        window.draw(cross2);
+    }
 }
