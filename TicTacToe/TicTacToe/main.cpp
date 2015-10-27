@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
-#include <array>
+#include <vector>
+
+#include <iostream>
 
 void draw_board(sf::RenderWindow &window);
 void draw_slot(sf::RenderWindow &window, int symbol ,int x_pos, int y_pos);
@@ -12,7 +14,7 @@ int main()
     int turn = 1; //1 for O, 2 for X
     
     //the initial board
-    std::array<std::array<int, 3>, 3> board{
+    std::vector<std::vector<int>> board{
         {{0,0,0},
          {0,0,0},
          {0,0,0}}
@@ -34,7 +36,7 @@ int main()
         draw_board(window);
         
         //draw the slots
-        for (int i = 0; 3; ++i)
+        for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 3; ++j)
                 draw_slot(window, board[i][j], i, j);
                 
