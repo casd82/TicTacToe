@@ -5,6 +5,7 @@
 
 void draw_board(sf::RenderWindow &window);
 void draw_slot(sf::RenderWindow &window, int symbol ,int x_pos, int y_pos);
+bool check_win(std::vector<std::vector<int>> &board, int side);
 
 int main()
 {
@@ -107,4 +108,70 @@ void draw_slot(sf::RenderWindow &window, int symbol, int x_pos, int y_pos)
         window.draw(cross1);
         window.draw(cross2);
     }
+}
+
+bool check_win(std::vector<std::vector<int>> &board, int side)
+{
+    int count;
+    
+    //check horizontally
+    for (int i = 0; i < 3; ++i)
+    {
+        //each row
+        count = 0;
+        for (int j = 0; j < 3; ++j)
+        {
+            if (board[i][j] == side)
+                ++count;
+        }
+        
+        if (count == 3)
+        {
+            return true;
+        }
+    }
+    
+    //check vertically
+    for (int j = 0; j < 3; ++j)
+    {
+        //each column
+        count = 0;
+        for (int i = 0; i < 3; ++i)
+        {
+            if (board[i][j] == side)
+                ++count;
+        }
+        
+        if (count == 3)
+        {
+            return true;
+        }
+    }
+    
+    //check diagonally
+    count = 0;
+    for (int i,j = 0; i < 3; ++i, ++j)
+    {
+        if (board[i][j] == side)
+            ++count;
+    }
+    
+    if (count == 3)
+    {
+        return true;
+    }
+    
+    count = 0;
+    for (int i = 0, j = 2; i < 3; ++i, --j)
+    {
+        if (board[i][j] == side)
+            ++count;
+    }
+    
+    if (count == 3)
+    {
+        return true;
+    }
+    
+    return false;
 }
