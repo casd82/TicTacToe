@@ -6,6 +6,8 @@
 void draw_board(sf::RenderWindow &window);
 void draw_slot(sf::RenderWindow &window, int symbol ,int x_pos, int y_pos);
 bool check_win(std::vector<std::vector<int>> &board, int side);
+bool handle_click(std::vector<std::vector<int>> &board, int side, int x, int y);
+void draw_win_scene();
 
 int main()
 {
@@ -13,6 +15,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(600, 600), "Tic Tac Toe", sf::Style::Titlebar | sf::Style::Close);
     
     int turn = 1; //1 for O, 2 for X
+    bool win = false;
     
     //the initial board
     std::vector<std::vector<int>> board{
@@ -31,6 +34,29 @@ int main()
             //close window
             if (event.type == sf::Event::Closed)
                 window.close();
+            
+            //handle click
+            if (!win && event.type == sf::Event::MouseButtonPressed)
+            {
+                if(handle_click(board, turn, event.mouseButton.x, event.mouseButton.y))
+                {
+                    //check if win
+                    win = check_win(board, turn);
+                    
+                    //change turn
+                    if (!win)
+                    {
+                        if (turn == 1)
+                        {
+                            turn = 2;
+                        }
+                        else
+                        {
+                            turn = 1;
+                        }
+                    }
+                }
+            }
         }
         
         //draw the board
@@ -40,7 +66,12 @@ int main()
         for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 3; ++j)
                 draw_slot(window, board[i][j], i, j);
-                
+        
+        if (win)
+        {
+            draw_win_scene();
+        }
+            
         window.display();
     }
     
@@ -174,4 +205,51 @@ bool check_win(std::vector<std::vector<int>> &board, int side)
     }
     
     return false;
+}
+
+bool handle_click(std::vector<std::vector<int>> &board, int side, int x, int y)
+{
+    //locate which slot is clicked
+    int i, j;
+    
+    //y for i
+    if (y < 200)
+    {
+        i = 0;
+    }
+    else if (y < 400)
+    {
+        i = 1;
+    }
+    else
+    {
+        i = 2;
+    }
+    
+    //x for j
+    if (x < 200)
+    {
+        j = 0;
+    }
+    else if (x < 400)
+    {
+        j = 1;
+    }
+    else
+    {
+        j = 2;
+    }
+    
+    if (board[i][j] == 0)   //if the slot is empty
+    {
+        board[i][j] = side;
+        return true;
+    }
+    
+    return false;
+}
+
+void draw_win_scene()
+{
+    
 }
