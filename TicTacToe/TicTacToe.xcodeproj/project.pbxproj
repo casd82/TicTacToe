@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		045E83651BDBCC1700C5FFE9 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 045E83641BDBCC1700C5FFE9 /* ResourcePath.mm */; };
 		045E83681BDBCC1700C5FFE9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 045E83671BDBCC1700C5FFE9 /* main.cpp */; };
+		D90280061BF77EE9003E65F7 /* Cut the crap.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D90280051BF77EE9003E65F7 /* Cut the crap.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,6 +18,7 @@
 		045E83641BDBCC1700C5FFE9 /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		045E83661BDBCC1700C5FFE9 /* ResourcePath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
 		045E83671BDBCC1700C5FFE9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D90280051BF77EE9003E65F7 /* Cut the crap.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cut the crap.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 		045E83691BDBCC1700C5FFE9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D90280051BF77EE9003E65F7 /* Cut the crap.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -130,6 +133,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D90280061BF77EE9003E65F7 /* Cut the crap.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +299,7 @@
 				045E83761BDBCC1700C5FFE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

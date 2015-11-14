@@ -1,13 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
-
 #include <iostream>
+
+#include "ResourcePath.hpp"
 
 void draw_board(sf::RenderWindow &window);
 void draw_slot(sf::RenderWindow &window, int symbol ,int x_pos, int y_pos);
 bool check_win(std::vector<std::vector<int>> &board, int side);
 bool handle_click(std::vector<std::vector<int>> &board, int side, int x, int y);
-void draw_win_scene();
+void draw_win_scene(sf::RenderWindow &window, int side);
 
 int main()
 {
@@ -69,7 +70,7 @@ int main()
         
         if (win)
         {
-            draw_win_scene();
+            draw_win_scene(window, turn);
         }
             
         window.display();
@@ -181,7 +182,7 @@ bool check_win(std::vector<std::vector<int>> &board, int side)
     
     //check diagonally
     count = 0;
-    for (int i,j = 0; i < 3; ++i, ++j)
+    for (int i = 0, j = 0; i < 3; ++i, ++j)
     {
         if (board[i][j] == side)
             ++count;
@@ -207,17 +208,17 @@ bool check_win(std::vector<std::vector<int>> &board, int side)
     return false;
 }
 
-bool handle_click(std::vector<std::vector<int>> &board, int side, int x, int y)
+bool handle_click(std::vector<std::vector<int>> &board, int side, int io, int jo)
 {
     //locate which slot is clicked
     int i, j;
     
     //y for i
-    if (y < 200)
+    if (io < 200)
     {
         i = 0;
     }
-    else if (y < 400)
+    else if (io < 400)
     {
         i = 1;
     }
@@ -227,11 +228,11 @@ bool handle_click(std::vector<std::vector<int>> &board, int side, int x, int y)
     }
     
     //x for j
-    if (x < 200)
+    if (jo < 200)
     {
         j = 0;
     }
-    else if (x < 400)
+    else if (jo < 400)
     {
         j = 1;
     }
@@ -249,7 +250,24 @@ bool handle_click(std::vector<std::vector<int>> &board, int side, int x, int y)
     return false;
 }
 
-void draw_win_scene()
+void draw_win_scene(sf::RenderWindow &window, int side)
 {
+    sf::Text text;
+    sf::Font font;
+    font.loadFromFile(resourcePath() + "Cut the crap.ttf");
+    text.setFont(font);
+    text.setCharacterSize(80);
+    text.setColor(sf::Color::Yellow);
+    text.setPosition(175, 250);
     
+    if (side == 1)
+    {
+        text.setString("O wins");
+    }
+    else
+    {
+        text.setString("X wins");
+    }
+    
+    window.draw(text);
 }
